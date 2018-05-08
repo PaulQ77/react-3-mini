@@ -6,7 +6,7 @@ import './App.css';
 // Toast notification dependencies
 import { ToastContainer, toast } from 'react-toastify';
 
-const baseUrl = 'https://joes-autos.herokuapp.com/api'
+const baseUrl = 'https://joes-autos.herokuapp.com/api';
 
 class App extends Component {
   constructor( props ) {
@@ -33,15 +33,14 @@ class App extends Component {
   getVehicles() {
     axios.get(`${baseUrl}/vehicles`).then(response => {
       this.setState({
-        vehiclesToDisplay : response.data
+        vehiclesToDisplay: response.data
       })
-      toast.success('We got dem vehicles, son')
+      toast.success('We got dem vehicles, son 🤙🏾')
     }).catch(() => toast.error('Uh oh, something happened'))
-    // setState with response -> vehiclesToDisplay
   }
 
   getPotentialBuyers() {
-    // axios (GET)
+    axios.get('')// axios (GET)
     // setState with response -> buyersToDisplay
   }
 
@@ -50,9 +49,8 @@ class App extends Component {
       console.log(res);
       this.setState({
         vehiclesToDisplay: res.data.vehicles
-      });
-    }).catch(() =>toast.error("Damn, sale didn't go through"))
-    // setState with response -> vehiclesToDisplay
+      })
+    })
   }
 
   filterByMake() {
@@ -73,10 +71,10 @@ class App extends Component {
     axios.put(`${baseUrl}/vehicles/${id}/${priceChange}`).then(response => {
       console.log(response)
       this.setState({
-        vehiclesToDisplay: response.data.vehicles 
-      });
-    }).catch(() => toast.error("Failed at updating price"))
-    // setState with response -> vehiclesToDisplay
+        vehiclesToDisplay: response.data.vehicles
+      })
+      toast.success('Price has been updated')
+    }).catch(() => toast.error('Uh Oh!'))
   }
 
   addCar() {
@@ -88,13 +86,12 @@ class App extends Component {
       price: this.refs.price.value
     };
     axios.post(`${baseUrl}/vehicles`, newCar).then(res => {
+      console.log(res)
       this.setState({
-        vehiclesToDisplay : res.data.vehicles
+        vehiclesToDisplay: res.data.vehicles
       })
-      toast.success("Heck yeah, good request, my brotha")
-    }).catch(() => toast.error('Uh oh'))
-    // axios (POST)
-    // setState with response -> vehiclesToDisplay
+      toast.success('Heck yeah, man, we just made a killer webrequest')
+    }).catch(() => toast.error('Uh oh!'))
   }
 
   addBuyer() {
